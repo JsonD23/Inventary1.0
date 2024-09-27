@@ -2,16 +2,38 @@
 CodeIgniter 3 API REST
 ###################
 
-Proyecto que implementa los servicio básicos de un CRUD a través de una API REST y el uso de la librería REST Controller.
+Proyecto de inventarios 
 
 *******************
-Archivos agregados a Codeigniter 3
+PRUEBAS DE GET,POST Y DELETE PARA PRESONAS
 *******************
+Para hacer un post se necesitan estos parámetros 
+la liga para thunderclient es : http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Personas
+{
+  "nombre":"Sandra",
+  "apaterno": "Neri ",
+  "amaterno": "Molina",
+  "matricula": "UTP0149702",
+  "telefono":"2223771315",
+  "correo":"UTP0149702@GMAIL.COM"
 
-- application/config/rest.php
-- application/libraries/REST_Controller.php
-- application/libraries/Format.php
-- Descargar desde https://www.itsolutionstuff.com/upload/codeigniter-api.zip
+}
+
+Si necesito hacer un get se ocupa igual la siguiente liga : http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Personas
+
+En caso de hacer un delete necesitamos agregar la liga seguido del ID que queremos borrar  http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Personas/1  
+y otra vez nuestro JSON con los datos previamente guardados de la persona 
+
+{
+  "nombre":"Sandra",
+  "apaterno": "Neri ",
+  "amaterno": "Molina",
+  "matricula": "UTP0149702",
+  "telefono":"2223771315",
+  "correo":"UTP0149702@GMAIL.COM"
+
+}
+
 
 **************************
 Controlador que implemeta la API REST
