@@ -157,4 +157,7 @@ NOTA
 LA LIGA PUEDE SER ASÍ http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Mobiliario 
 O AGREGANDO EL PUERTO http://localhost:8080/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Mobiliario
 
-
+*******************
+NOTA 2
+*******************
+Try y catch RAMA DE SANDRA
