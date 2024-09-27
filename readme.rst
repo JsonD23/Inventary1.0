@@ -5,7 +5,7 @@ CodeIgniter 3 API REST
 Proyecto de inventarios 
 
 *******************
-PRUEBAS DE GET,POST,PUT  Y DELETE PARA PRESONAS
+PRUEBAS DE GET,POST,PUT  Y DELETE PARA PERSONAS
 *******************
 Para hacer un post se necesitan estos parámetros 
 la liga para thunderclient es : http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Personas
@@ -73,6 +73,38 @@ PUT : con la siguiente liga seguida con el ID ingresar los datos a actualizar
   "edificio": "D9 ",
   "departamento": "Automotriz",
   "area": "laboratorio 211"
+}
+
+**************************
+PRUEBAS DE GET,POST,PUT  Y DELETE PARA RESGUARDOS 
+**************************
+LIGA
+Post resguardos : http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Resguardo
+seguido de los datos a ingresar 
+{
+
+  "id_persona": "1 ",
+  "id_mobiliario": "1",
+  "fecha_asignacion": "2023-04-21 11:01:19"
+}
+Liga GET resguardos: http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Resguardo
+
+Para hacer un Put se necesita la liga junto con el ID del resguardo a eliminar http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Resguardo/1  y el JSON con los datos a modificar
+
+{
+
+  "id_persona": "1 ",
+  "id_mobiliario": "1",
+  "fecha_asignacion": "2023-04-21 18:01:18"
+}
+
+Por último para hacer un delete se necesita ingresar la liga unto con el ID del resguardo a eliminar http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Resguardo
+Ingrese el json con  los datos a eliminar 
+{
+
+  "id_persona": "1 ",
+  "id_mobiliario": "1",
+  "fecha_asignacion": "2023-04-21 18:01:18"
 }
 
 
