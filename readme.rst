@@ -5,7 +5,7 @@ CodeIgniter 3 API REST
 Proyecto de inventarios 
 
 *******************
-PRUEBAS DE GET,POST Y DELETE PARA PRESONAS
+PRUEBAS DE GET,POST,PUT  Y DELETE PARA PRESONAS
 *******************
 Para hacer un post se necesitan estos parámetros 
 la liga para thunderclient es : http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Personas
@@ -27,6 +27,18 @@ y otra vez nuestro JSON con los datos previamente guardados de la persona
 {
   "nombre":"Sandra",
   "apaterno": "Neri ",
+  "amaterno": "Molina",
+  "matricula": "UTP0149702",
+  "telefono":"2223771315",
+  "correo":"UTP0149702@GMAIL.COM"
+
+}
+Por último para realizar un PUT se necesita poner la liga con el ID de la persona que quieres actualizar http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Personas/1  
+
+Nuevamente introducir el JSON junto con los cambios a guardar
+{
+  "nombre":"Juan",
+  "apaterno": "Lopez ",
   "amaterno": "Molina",
   "matricula": "UTP0149702",
   "telefono":"2223771315",
