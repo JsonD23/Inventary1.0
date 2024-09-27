@@ -48,10 +48,33 @@ Nuevamente introducir el JSON junto con los cambios a guardar
 
 
 **************************
-Controlador que implemeta la API REST
+PRUEBAS DE GET,POST,PUT  Y DELETE PARA Ubicaciones
 **************************
+Post: http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Ubicaciones 
+{
+  "edificio": "D5 ",
+  "departamento": "TICS",
+  "area": "laboratorio 211"
+}
 
-application/controllers/Api/Item.php
+Delete : la liga tiene que estar seguida del ID de la ubicación que se desee eliminar http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Ubicaciones/1 seguido del JSON con todos los parámetros que contiene esa ubicación
+
+{
+  "edificio": "D5 ",
+  "departamento": "TICS",
+  "area": "laboratorio 211"
+}
+
+
+GET : con la siguiente liga obtendrá todos los datos http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Ubicaciones 
+
+PUT : con la siguiente liga seguida con el ID ingresar los datos a actualizar 
+{
+  "edificio": "D9 ",
+  "departamento": "Automotriz",
+  "area": "laboratorio 211"
+}
+
 
 *******************
 Métodos implementados
