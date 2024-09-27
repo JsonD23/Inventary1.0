@@ -109,25 +109,52 @@ Ingrese el json con  los datos a eliminar
 
 
 *******************
-Métodos implementados
+PRUEBAS DE GET,POST,PUT  Y DELETE PARA MOBILIARIO
+*******************
+Para hacer el get de mobiliario http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Mobiliario
+
+Para hacer un POST: 
+El json quedaría así
+{
+  "nombre":"Escritorio de madera",
+  "descripcion": "4 metros x 4 metros ",
+  "tipo": "1",
+  "estado": "2",
+  "fecha_registro":"2023-04-21 11:01:19",
+  "activo":"1",
+  "codigo":"utp_mobil13"
+}
+Para delete se necesitan ingresar los parámetros y la liga agregando el ID
+http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Mobiliario/1
+{
+  "nombre":"Escritorio de madera",
+  "descripcion": "4 metros x 4 metros ",
+  "tipo": "1",
+  "estado": "2",
+  "fecha_registro":"2023-04-21 11:01:19",
+  "activo":"1",
+  "codigo":"utp_mobil13"
+}
+Para hacer un put igual se necesita el ID http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Mobiliario/1
+
+y hacer los cambios en el JSON
+{
+  "nombre":"Escritorio de madera",
+  "descripcion": "2 metros x 2 metros ",
+  "tipo": "1",
+  "estado": "2",
+  "fecha_registro":"2023-04-21 11:01:19",
+  "activo":"1",
+  "codigo":"utp_mobil13234"
+}
+
+
+
+*******************
+NOTA
 *******************
 
-GET, POST, PUT, DELETE
+LA LIGA PUEDE SER ASÍ http://localhost/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Mobiliario 
+O AGREGANDO EL PUERTO http://localhost:8080/10a/10A/codeigniter3-rest-controller-main/codeigniter3-rest-controller-main/index.php/Api/Mobiliario
 
-*******************
-Consumo de los servicios
-*******************
 
-Revisa la carpeta /capturas
-
-*******
-Licencia
-*******
-
-Por favor ver `acuerdo de licencia <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
-
-***************
-Agradecimiento
-***************
-
-Gracias a Hardik Savani por su valioso aporte https://www.itsolutionstuff.com/post/codeigniter-3-restful-api-tutorialexample.html
