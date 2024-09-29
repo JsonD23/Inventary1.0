@@ -161,3 +161,8 @@ O AGREGANDO EL PUERTO http://localhost:8080/10a/10A/codeigniter3-rest-controller
 NOTA 2
 *******************
 Try y catch RAMA DE SANDRA
+
+*******************
+CONFIGURACIONES ADICIONALES:
+*******************
+para no tener problemas con los cors se hicieron modificaciones en htaccess , se agregó config.php y añadieron encabezados en cada Api/Controller
