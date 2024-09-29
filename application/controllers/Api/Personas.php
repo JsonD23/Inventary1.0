@@ -1,80 +1,115 @@
 <?php
-   
+
 require APPPATH . 'libraries/REST_Controller.php';
-     
+
 class Personas extends REST_Controller {
-    
-	/**
-   * Get All Data from this method.
-   *
-   * @return Response
-   */
-   
+
    public function __construct() {
       parent::__construct();
       $this->load->database();
    }
 
-   public function index_get($id = 0){
-      if(!empty($id)){
-         $data = $this->db->get_where("personas", array('id_persona' => $id))->row_array();
-      }else{
-         $data = $this->db->get("personas")->result();
+   public function index_get($id = 0) {
+      try {
+         if (!empty($id)) {
+            $data = $this->db->get_where("personas", array('id_persona' => $id))->row_array();
+            if (!$data) {
+               throw new Exception("Persona no encontrada");
+            }
+         } else {
+            $data = $this->db->get("personas")->result();
+         }
+
+         $response = array(
+            "status"    => "ok",
+            "message"   => "PERSONAS recuperadas",
+            "data"      => $data
+         );
+         $this->response($response, REST_Controller::HTTP_OK);
+
+      } catch (Exception $e) {
+         $this->response(array(
+            "status" => "error",
+            "message" => $e->getMessage()
+         ), REST_Controller::HTTP_BAD_REQUEST);
       }
-      $data = array(
-         "status"    => "ok",
-         "message"   => "PERSONAS recuperadas",
-         "data"      => $data
-      );
-      $this->response($data, REST_Controller::HTTP_OK);
-	}
+   }
 
-   public function index_post()
-   {
-      $json = $this->input->raw_input_stream;
-      $persona = json_decode($json);
-      $data=$this->db->insert('personas',$persona);
-      if($data>0){
-        $agregado=$this->db->select_max('id_persona');
-        $id=$this->db->get('personas')->row_array()["id_persona" ];
-        $data=array (
-            "status"=> "ok",
-            "message"=>"persona agregada",
-            "data"=>array(
-                "id_persona"=> $id
+   public function index_post() {
+      try {
+         $json = $this->input->raw_input_stream;
+         $persona = json_decode($json, true);
+
+         if (!$this->db->insert('personas', $persona)) {
+            throw new Exception("Error al insertar persona");
+         }
+
+         $id = $this->db->insert_id();
+         $response = array(
+            "status" => "ok",
+            "message" => "Persona agregada",
+            "data" => array(
+               "id_persona" => $id
             )
-            );
-            $this->response($data, REST_Controller::HTTP_OK);
-    
-    }
+         );
+         $this->response($response, REST_Controller::HTTP_OK);
 
-      $data = array(
-         "status"    => "ok",
-         "message"   => "Persona agregado"
-      );
-      $this->response($data, REST_Controller::HTTP_OK);
+      } catch (Exception $e) {
+         $this->response(array(
+            "status" => "error",
+            "message" => $e->getMessage()
+         ), REST_Controller::HTTP_BAD_REQUEST);
+      }
    }
 
-   public function index_put($id)
-   {
-    $json = $this->input->raw_input_stream;
-    $persona = json_decode($json);
-      $this->db->update('personas', $persona, array('id_persona'=>$id));
-      $data = array(
-         "status"    => "ok",
-         "message"   => "Persona actualizado"
-      );
-      $this->response($data, REST_Controller::HTTP_OK);
+   public function index_put($id) {
+      try {
+         $json = $this->input->raw_input_stream;
+         $persona = json_decode($json, true);
+
+         if (empty($id)) {
+            throw new Exception("ID de persona no proporcionado");
+         }
+
+         if (!$this->db->update('personas', $persona, array('id_persona' => $id))) {
+            throw new Exception("Error al actualizar la persona");
+         }
+
+         $response = array(
+            "status"    => "ok",
+            "message"   => "Persona actualizada"
+         );
+         $this->response($response, REST_Controller::HTTP_OK);
+
+      } catch (Exception $e) {
+         $this->response(array(
+            "status" => "error",
+            "message" => $e->getMessage()
+         ), REST_Controller::HTTP_BAD_REQUEST);
+      }
    }
 
-   public function index_delete($id)
-   {
-      $this->db->delete('personas', array('id_persona'=>$id));
-      $data = array(
-         "status"    => "ok",
-         "message"   => "Persona eliminado"
-      );
-      $this->response($data, REST_Controller::HTTP_OK);
-   }
+   public function index_delete($id) {
+      try {
+         if (empty($id)) {
+            throw new Exception("ID de persona no proporcionado");
+         }
 
+         if (!$this->db->delete('personas', array('id_persona' => $id))) {
+            throw new Exception("Error al eliminar la persona");
+         }
+
+         $response = array(
+            "status"    => "ok",
+            "message"   => "Persona eliminada"
+         );
+         $this->response($response, REST_Controller::HTTP_OK);
+
+      } catch (Exception $e) {
+         $this->response(array(
+            "status" => "error",
+            "message" => $e->getMessage()
+         ), REST_Controller::HTTP_BAD_REQUEST);
+      }
+   }
 }
