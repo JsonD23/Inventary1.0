@@ -9,35 +9,45 @@ class Resguardo extends REST_Controller {
         $this->load->database();
     }
 
-    
     public function index_get($id = 0){
-        if(!empty($id)){
-            $data = $this->db->get_where("resguardo", array('id_resguardo' => $id))->row_array();
-        } else {
-            $data = $this->db->get("resguardo")->result();
+        try {
+            if(!empty($id)){
+                $data = $this->db->get_where("resguardo", array('id_resguardo' => $id))->row_array();
+                if (!$data) {
+                    throw new Exception("Resguardo no encontrado");
+                }
+            } else {
+                $data = $this->db->get("resguardo")->result();
+            }
+            $response = array(
+                "status"    => "ok",
+                "message"   => "Resguardo(s) recuperado(s)",
+                "data"      => $data
+            );
+            $this->response($response, REST_Controller::HTTP_OK);
+        } catch (Exception $e) {
+            $this->response(array(
+                "status" => "error",
+                "message" => $e->getMessage()
+            ), REST_Controller::HTTP_BAD_REQUEST);
         }
-        $response = array(
-            "status"    => "ok",
-            "message"   => "Resguardo(s) recuperado(s)",
-            "data"      => $data
-        );
-        $this->response($response, REST_Controller::HTTP_OK);
     }
 
-   
     public function index_post()
     {
-      
-        $json = $this->input->raw_input_stream;
-       
-        $resguardo = json_decode($json, true);
+        try {
+            $json = $this->input->raw_input_stream;
+            $resguardo = json_decode($json, true);
 
-        
-        if (isset($resguardo['id_persona'], $resguardo['id_mobiliario'], $resguardo['fecha_asignacion'])) {
-      
-            $this->db->insert('resguardo', $resguardo);
+            if (!isset($resguardo['id_persona'], $resguardo['id_mobiliario'], $resguardo['fecha_asignacion'])) {
+                throw new Exception("Campos faltantes en el resguardo");
+            }
+
+            if (!$this->db->insert('resguardo', $resguardo)) {
+                throw new Exception("Error al insertar resguardo");
+            }
+
             $insert_id = $this->db->insert_id(); 
-
             $response = array(
                 "status" => "ok",
                 "message" => "Resguardo agregado",
@@ -46,55 +56,61 @@ class Resguardo extends REST_Controller {
                 )
             );
             $this->response($response, REST_Controller::HTTP_OK);
-        } else {
-  
+        } catch (Exception $e) {
             $this->response(array(
                 "status" => "error",
-                "message" => "Campos faltantes en el resguardo"
+                "message" => $e->getMessage()
             ), REST_Controller::HTTP_BAD_REQUEST);
         }
     }
 
-
     public function index_put($id)
     {
-    
-        $json = $this->input->raw_input_stream;
+        try {
+            $json = $this->input->raw_input_stream;
+            $resguardo = json_decode($json, true);
 
-        $resguardo = json_decode($json, true);
+            if (empty($id) || !isset($resguardo['id_persona'], $resguardo['id_mobiliario'], $resguardo['fecha_asignacion'])) {
+                throw new Exception("ID incorrecto o campos faltantes");
+            }
 
-   
-        if (!empty($id) && isset($resguardo['id_persona'], $resguardo['id_mobiliario'], $resguardo['fecha_asignacion'])) {
-            $this->db->update('resguardo', $resguardo, array('id_resguardo' => $id));
+            if (!$this->db->update('resguardo', $resguardo, array('id_resguardo' => $id))) {
+                throw new Exception("Error al actualizar el resguardo");
+            }
+
             $response = array(
                 "status"    => "ok",
                 "message"   => "Resguardo actualizado"
             );
             $this->response($response, REST_Controller::HTTP_OK);
-        } else {
-            // Respuesta de error si faltan campos o el ID es incorrecto
+        } catch (Exception $e) {
             $this->response(array(
                 "status" => "error",
-                "message" => "ID incorrecto o campos faltantes"
+                "message" => $e->getMessage()
             ), REST_Controller::HTTP_BAD_REQUEST);
         }
     }
 
-   
     public function index_delete($id)
     {
-        if (!empty($id)) {
-            $this->db->delete('resguardo', array('id_resguardo' => $id));
+        try {
+            if (empty($id)) {
+                throw new Exception("ID faltante o incorrecto");
+            }
+
+            if (!$this->db->delete('resguardo', array('id_resguardo' => $id))) {
+                throw new Exception("Error al eliminar el resguardo");
+            }
+
             $response = array(
                 "status"    => "ok",
                 "message"   => "Resguardo eliminado"
             );
             $this->response($response, REST_Controller::HTTP_OK);
-        } else {
-    
+        } catch (Exception $e) {
             $this->response(array(
                 "status" => "error",
-                "message" => "ID faltante o incorrecto"
+                "message" => $e->getMessage()
             ), REST_Controller::HTTP_BAD_REQUEST);
         }
     }
